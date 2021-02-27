@@ -1,0 +1,5 @@
+-Cleanup
+-Recommend destinations, not just attractions given a destination
+-It'd be really cool to try a webscrapping thing to give this more than manual inputs
+-User interaction, esp to build profile
+

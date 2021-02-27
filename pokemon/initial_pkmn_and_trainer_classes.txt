@@ -1,0 +1,82 @@
+class Pokemon:
+  def __init__(self, name, level, health, max_health, type, is_knocked_out=False):
+    self.name = name
+    self.level = level
+    self.health = health
+    self.max_health = max_health
+    self.type = type
+    self.is_knocked_out = is_knocked_out
+    
+  def lose_health(self, health_lost):
+    if health_lost > self.health:
+      self.knock_out()
+    else:
+      self.health -= health_lost
+      print(self.name, 'now has', str(self.health), 'health')
+           
+  def knock_out(self):
+    self.health = 0
+    self.is_knocked_out = True
+    print(self.name, 'is knocked out!')
+
+  def revive(self):
+    self.health = self.max_health
+    self.is_knocked_out = False
+    print(self.name, 'is revived!', self.name, 'has', self.health, 'health')
+
+  def attack(self, other):
+    damage = self.level
+    print(self.name, 'attacked!')
+    if has_advantage(self, other):
+      damage *= 2
+      print('It\'s super effective!')
+    elif has_disadvantage:
+      damage = damage // 2
+      print('It\'s not very effective...')
+    other.lose_health(damage)
+
+  def has_advantage(self, other):
+    if (self.type == 'Fire' and other.type == 'Grass') \
+    or (self.type == 'Grass' and other.type == 'Water') \
+    or (self.type == 'Water' and other.type == 'Fire'):
+      return True
+    return False
+
+  def has_disadvantage(self, other):
+    if (self.type == 'Fire' and other.type == 'Water') \
+    or (self.type == 'Grass' and other.type == 'Fire') \
+    or (self.type == 'Water' and other.type == 'Grass'):
+      return True
+    return False
+
+class Trainer:
+  def __init__(self, name, pokemon=[]):
+    self.name = name
+    self.pokemon = pokemon
+    self.active_pokemon = None
+    if len(pokemon) > 0:
+      self.active_pokemon = pokemon[0]
+
+  def potion(self):
+    if self.active_pokemon.health == self.active_pokemon.max_health:
+      print('It won\'t have any effect...')
+    else:
+      self.active_pokemon.health += 20
+      if self.active_pokemon.haelth > self.active_pokemon.max_health:
+        self.active_pokemon.health = self.active_pokemon.max_health
+      print(self.active_pokemon.name, 'had it\s health restored!', 
+      self.active_pokemon.name, 'has', str(self.active_pokemon.health), 
+      'health')
+
+  def attack(self, other):
+    print(self.active_pokemon.name, 'attacked', other.active_pokemon.name, '!')
+    self.active_pokemon.attack(other.active_pokemon)
+
+
+  def switch(self, new_pokemon):
+    for pkmn in self.pokemon:
+      if pkmn.name == new_pokemon:
+        self.active_pokemon = pkmn
+        print('Switched to', new_pokemon)
+        return
+    print('No such pokemon in party')

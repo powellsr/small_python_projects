@@ -1,0 +1,38 @@
+'''BATTLESHIP!
+Hide...
+Excellent! Now, lets hide our battleship in a random location on the board.
+
+Since we have a 2-dimensional list, well use two variables to store the ships location, ship_row and ship_col.
+
+from random import randint
+coin = randint(0, 1)
+dice = randint(1, 6)
+In the above example, we first import the randint(low, high) function from the random module.
+Then, we generate either zero or one and store it in coin.
+Finally, we generate a number from one to six inclusive.
+Lets generate a random_row and random_col from zero to four!
+
+Instructions
+1.
+Define two new functions, random_row and random_col, that each take board_in as input.
+
+These functions should return a random row index and a random column index from your board, respectively. Use randint(0, len(board_in) - 1).
+
+Call each function on board.'''
+from random import randint #Importing randint module
+
+board = []
+
+for x in range(0, 5):
+  board.append(["O"] * 5)
+
+def print_board(board):
+  for row in board:
+    print " ".join(row)
+
+# Add your code below!
+def random_row(board_in):#This fn will define a random number within range of no. rows in board
+  return randint(0, len(board_in) - 1)
+
+def random_col(board_in):#This fn will define a random number within range of no. columns, is this fortuitous because we have a square? Could we work with a rectangle?
+  return randint(0, len(board_in) - 1)

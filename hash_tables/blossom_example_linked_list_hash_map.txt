@@ -1,0 +1,48 @@
+from linked_list import Node, LinkedList
+from blossom_lib import flower_definitions
+
+class HashMap:
+  def __init__(self, size):
+    self.array_size = size
+    self.array = [LinkedList() for i in range(self.array_size)]
+
+  def hash(self, key):
+    return sum(key.encode())
+
+  def compress(self, hash_code):
+    return hash_code % self.array_size
+
+  def assign(self, key, value):
+    array_index = self.compress(self.hash(key))
+    payload = Node([key, value])
+    list_at_array = self.array[array_index]
+    for kv_pair in list_at_array:
+      if kv_pair[0] == key:
+        kv_pair[1] == value
+    list_at_array.insert(payload)
+
+  def retrieve(self, key):
+    array_index = self.compress(self.hash(key))
+    list_at_index = self.array[array_index]
+    for kv_pair in list_at_index:
+      if kv_pair[0] == key:
+        return kv_pair[1]
+      else:
+        return None
+
+    if payload is not None:
+      if payload[0] == key:
+        return payload[1]
+      else:
+        return None
+    else:
+      return None
+
+blossom = HashMap(len(flower_definitions))
+for definition in flower_definitions:
+  print(definition[0], definition[1]) #optional
+  blossom.assign(definition[0], definition[1])
+
+print(blossom.retrieve('daisy'))
+print(blossom.retrieve('rose'))
+print(blossom.retrieve('lily'))

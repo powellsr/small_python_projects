@@ -1,0 +1,63 @@
+'''BATTLESHIP!
+Game Over
+If someone runs out of guesses without winning right now, the game just exits. It would be nice to let them know why.
+
+Since we only want this message to display if the user guesses wrong on their last turn, we need to think carefully about where to put it.
+
+Well want to put it under the else that accounts for misses
+Well want to print the message no matter what the cause of the miss
+Since our turn variable starts at 0 and goes to 3, we will want to end the game when turn equals 3.
+Instructions
+1.
+Add an if statement that checks to see if the user is out of guesses.
+
+Put it under the else that accounts for misses.
+Put it after the if/elif/else statements that check for the reason the player missed. We want "Game Over" to print regardless of the reason.
+If turn equals 3, print "Game Over".'''
+
+from random import randint
+
+board = []
+
+for x in range(0, 5):
+  board.append(["O"] * 5)
+
+def print_board(board):
+  for row in board:
+    print " ".join(row)
+
+print_board(board)
+
+def random_row(board):
+  return randint(0, len(board) - 1)
+
+def random_col(board):
+  return randint(0, len(board[0]) - 1)
+
+ship_row = random_row(board)
+ship_col = random_col(board)
+print ship_row
+print ship_col
+
+# Everything from here on should be in your for loop
+# don't forget to properly indent!
+for turn in range(4):
+  print "Turn", turn + 1#this prints turn number, one more than turn index, since indices start at 0. This syntax must concentrate strings and values
+  guess_row = int(raw_input("Guess Row: "))
+  guess_col = int(raw_input("Guess Col: "))
+
+  if guess_row == ship_row and guess_col == ship_col:
+    print "Congratulations! You sank my battleship!"   
+  else:
+    if guess_row not in range(5) or \
+      guess_col not in range(5):
+      print "Oops, that's not even in the ocean."
+    elif board[guess_row][guess_col] == "X":
+      print( "You guessed that one already." )
+    else:
+      print "You missed my battleship!"
+      board[guess_row][guess_col] = "X"
+    if turn == 3:#This executes after the 4th turn, regardless of reason for miss, at end of loop
+      print "Game Over"
+    print_board(board)
+  # print turn + 1 here

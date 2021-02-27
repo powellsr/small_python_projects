@@ -1,0 +1,5 @@
+-Bigger ships
+-Two player(two boards)
+-AI player
+-Fix indices for user interaction
+-Print gameboard after victory

@@ -24,16 +24,18 @@ ship_col = random_col(board)
 # don't forget to properly indent!
 turns = int(input("Enter number of turns: "))
 while turns > 24 or turns < 1:#This loop objects to strange no.s of turns imputed
-  printi("Well that's just absurd...")
+  print("Well that's just absurd...")
   turns = int(input("Enter a REASONABLE number of turns: "))
   
 for turn in range(turns):
   print("Turn", turn + 1)  #this prints turn number, one more than turn index, since indices start at 0. This syntax must concentrate strings and values
-  guess_row = int(input("Guess Row: "))
-  guess_col = int(input("Guess Col: "))
+  guess_row = int(input("Guess Row: ")) - 1
+  guess_col = int(input("Guess Col: ")) - 1
 
   if guess_row == ship_row and guess_col == ship_col:
+    board[guess_row][guess_col] = '#'
     print("Congratulations! You sank my battleship!")
+    print_board(board)
     break # "break" command breaks a loop (the for loop that governs turns). Here it is nested under the win conditional, so if the game is won, the loop ends. 
   else:
     if guess_row not in range(5) or \
